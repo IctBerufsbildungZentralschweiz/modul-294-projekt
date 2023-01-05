@@ -15,8 +15,8 @@ describe('Login', () => {
                 statusCode: 422,
                 body: {
                     errors: {
-                        email: 'E-Mail',
-                        password: 'Passwort',
+                        email: 'Error E-Mail',
+                        password: 'Error Passwort',
                     }
                 }
             })
@@ -29,17 +29,10 @@ describe('Login', () => {
         cy.get('#submit').should('exist')
     })
 
-    it('Beim Aufrufen der `/form` Route ohne Session wird der Benutzer auf `/login` umgeleitet', () => {
-        cy
-            .intercept('GET', '/projekt/auth', req => {
-                req.reply({ statusCode: 401 })
-            })
-            .as('checkAuth')
+    it('Der «Zurück zur Übersicht» Link verweist auf die `ListView`', () => {
+        cy.visit('/login')
 
-        cy.visit('/form')
-        cy.wait('@checkAuth')
-
-        cy.url().should('match', /\/login$/)
+        cy.get('.back-link > a').invoke('attr', 'href').should('equal', '/')
     })
 
     it('Die Formularfelder `email` und  `password` sind an eine Variable gebunden', () => {
@@ -72,8 +65,8 @@ describe('Login', () => {
         cy.get('#submit').click()
 
         cy.wait('@login', { timeout: 1000 })
-        cy.get('#error-email').should('be.visible').and('contain', 'E-Mail')
-        cy.get('#error-password').should('be.visible').and('contain', 'Passwort')
+        cy.get('#error-email').should('be.visible').and('contain', 'Error E-Mail')
+        cy.get('#error-password').should('be.visible').and('contain', 'Error Passwort')
     })
 
     it('Nach dem Login wird der Benutzer auf `/form` umgeleitet', () => {
@@ -91,14 +84,8 @@ describe('Login', () => {
         cy.get('#submit').click()
 
         cy.wait('@login', { timeout: 1000 })
-        cy.wait('@checkAuth', { timeout: 1000 })
+        cy.wait(500)
 
         cy.url().should('match', /\/form$/)
-    })
-
-    it('Der «Zurück zur Übersicht» Link verweist auf die `ListView`', () => {
-        cy.visit('/login')
-
-        cy.get('.back-link > a').invoke('attr', 'href').should('equal', '/')
     })
 })

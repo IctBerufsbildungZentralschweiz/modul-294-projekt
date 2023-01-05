@@ -14,7 +14,7 @@ describe('FormView', () => {
         cy.get('#submit').should('exist')
     })
 
-    it('Der «Zurück zur Übersicht» Button in der `FormView` verweist auf die `ListView` mittels `<router-link>` Komponente', () => {
+    it('Der «Zurück zur Übersicht» Button in der `FormView` verweist auf die `/`', () => {
         setup()
 
         cy.intercept('/projekt/feedback', req => {
@@ -76,9 +76,9 @@ describe('FormView', () => {
                 statusCode: 422,
                 body: {
                     errors: {
-                        title: 'Title',
-                        text: 'Text',
-                        category: 'Category',
+                        title: 'Error Title',
+                        text: 'Error Text',
+                        category: 'Error Category',
                     }
                 }
             })
@@ -89,9 +89,9 @@ describe('FormView', () => {
         cy.get('#submit').click()
 
         cy.get('@create', { timeout: 1000 }).then(() => {
-            cy.get('#error-title').should('be.visible').and('contain', 'Title')
-            cy.get('#error-text').should('be.visible').and('contain', 'Text')
-            cy.get('#error-category').should('be.visible').and('contain', 'Category')
+            cy.get('#error-title').should('be.visible').and('contain', 'Error Title')
+            cy.get('#error-text').should('be.visible').and('contain', 'Error Text')
+            cy.get('#error-category').should('be.visible').and('contain', 'Error Category')
         })
     })
 
@@ -116,5 +116,18 @@ describe('FormView', () => {
         cy.get('@create').then(() => {
             cy.url().should('match', /\/$/)
         })
+    })
+
+    it('Beim Aufrufen der `/form` Route ohne Session wird der Benutzer auf `/login` umgeleitet', () => {
+        cy
+            .intercept('GET', '/projekt/auth', req => {
+                req.reply({ statusCode: 401 })
+            })
+            .as('checkAuth')
+
+        cy.visit('/form')
+        cy.wait('@checkAuth')
+
+        cy.url().should('match', /\/login$/)
     })
 })

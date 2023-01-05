@@ -16,6 +16,6 @@ npm run test:e2e:dev
 ## Testsuite ausführen
 
 ```sh
-npm build
+npm run build
 npm run test:e2e
 ```

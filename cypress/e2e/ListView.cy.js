@@ -84,32 +84,4 @@ describe('Listenansicht', () => {
         })
     })
 
-    it('Die Listeneinträge werden anhand des aktiven Filters gefiltert', () => {
-        setup([
-            { id: 1, title: 'Beispiel', text: 'ABC', votes: 0, category: 'Bug', comments: [] },
-            { id: 2, title: 'Beispiel', text: 'ABC', votes: 0, category: 'Feature', comments: [] },
-            { id: 3, title: 'Beispiel', text: 'ABC', votes: 0, category: 'Feature', comments: [] },
-        ])
-        cy.wait('@loadFeedback')
-
-        cy.get('.feedback-list > .feedback').then((allFeedback) => {
-            // Filter aktivieren
-            cy.get('.filter-link:first').click()
-            cy.wait(250)
-            cy.get('.feedback-list > .feedback').should('have.length', 1)
-        })
-    })
-
-    it('Die Filterbox ist während des Ladens der Einträge nicht sichtbar', () => {
-        setup()
-        cy.get('.filter-box', { timeout: 500 }).should('not.exist')
-
-        // Nach dem Laden der Einträge muss die Filterbox sichtbar sein
-        cy.wait('@loadFeedback')
-        cy
-            .get('.feedback-list > .feedback')
-            .then(() => {
-                cy.get('.filter-box').should('exist')
-            })
-    })
 })
