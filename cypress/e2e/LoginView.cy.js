@@ -29,7 +29,7 @@ describe('Login', () => {
         cy.get('#submit').should('exist')
     })
 
-    it('Der «Zurück zur Übersicht» Link verweist auf die `ListView`', () => {
+    it('Der «Zurück zur Übersicht» Link verweist auf `/`', () => {
         cy.visit('/login')
 
         cy.get('.back-link > a').invoke('attr', 'href').should('equal', '/')

@@ -14,7 +14,7 @@ describe('FormView', () => {
         cy.get('#submit').should('exist')
     })
 
-    it('Der «Zurück zur Übersicht» Button in der `FormView` verweist auf die `/`', () => {
+    it('Der «Zurück zur Übersicht» Button in der `FormView` verweist auf die `/` Route', () => {
         setup()
 
         cy.intercept('/projekt/feedback', req => {
