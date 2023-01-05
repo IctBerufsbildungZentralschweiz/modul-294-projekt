@@ -63,7 +63,7 @@ import IconComment from '../components/icons/IconComment.vue'
           <div class="feedback-list space-y">
 
             <!-- Feedback -->
-            <a href="#" class="box feedback">
+            <div class="box feedback">
 
               <!-- Voter -->
               <div>
@@ -116,7 +116,7 @@ import IconComment from '../components/icons/IconComment.vue'
                   </div>
                 </div>
               </div>
-            </a>
+            </div>
 
           </div>
 
