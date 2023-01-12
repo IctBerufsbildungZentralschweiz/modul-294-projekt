@@ -354,7 +354,7 @@ textarea.form-control {
 }
 
 .screen-center {
-    min-height: 100vh;
+    min-height: calc(100vh - 200px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -376,4 +376,11 @@ textarea.form-control {
     margin-top: 2rem;
     font-size: .8rem;
     color: var(--color-gray-500);
+}
+
+.footer {
+    font-size: .8rem;
+    margin-top: 4rem;
+    color: var(--color-gray-400);
+    text-align: center;
 }

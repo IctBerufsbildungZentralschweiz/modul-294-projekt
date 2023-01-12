@@ -1,6 +1,6 @@
 import { useToken } from './auth'
 
-const backend = 'http://modul-294-backend.lndo.site/projekt'
+const backend = 'https://backend.m294.ict-bz.ch/projekt'
 
 const { token, setToken } = useToken()
 

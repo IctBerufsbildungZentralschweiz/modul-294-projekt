@@ -5,6 +5,6 @@ module.exports = defineConfig({
     e2e: {
         specPattern: 'cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}',
         baseUrl: 'http://localhost:4173',
-        backendUrl: 'http://modul-294-backend.lndo.site',
+        backendUrl: 'https://backend.m294.ict-bz.ch',
     },
 })
