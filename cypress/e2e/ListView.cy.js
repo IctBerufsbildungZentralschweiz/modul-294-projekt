@@ -44,7 +44,7 @@ describe('Listenansicht', () => {
         cy.get('.btn-create').invoke('attr', 'href').should('match', /\/form$/)
     })
 
-    it('Die Listeneinträge werden vom Backend geladen', () => {
+    it('Die Listeneinträge werden vom Backend geladen und aufgelistet angezeigt', () => {
         setup()
 
         cy.wait('@loadFeedback').then(() => {
