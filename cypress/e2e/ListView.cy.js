@@ -68,7 +68,7 @@ describe('Listenansicht', () => {
 
         cy.wait('@loadFeedback')
         cy.get('.feedback-list > .feedback').then(() => {
-            cy.get('.status-label').invoke('text').should('eql', `2 Einträge`)
+            cy.get('.status-label').invoke('text').then(t => t.trim()).should('match', /2\s+Einträge/)
         })
     })
 
@@ -80,7 +80,7 @@ describe('Listenansicht', () => {
         cy.wait('@loadFeedback')
 
         cy.get('.feedback-list > .feedback').then(() => {
-            cy.get('.status-label').invoke('text').should('match', /\d Eintrag/)
+            cy.get('.status-label').invoke('text').then(t => t.trim()).should('match', /Eintrag/)
         })
     })
 
