@@ -27,16 +27,6 @@ describe('FormView', () => {
         })
     })
 
-    it('Das `Feedback Hub` Logo verlinkt auf `/`', () => {
-        setup()
-
-        cy.intercept('/projekt/feedback', req => {
-            req.reply({ statusCode: 200, body: { data: [] } })
-        })
-
-        cy.get('#logo').invoke('attr', 'href').should('equal', '/')
-    })
-
     it('Beim Klick auf `Feedback erstellen` werden die Formulardaten an das Backend gesendet', () => {
         // Eintrag soll nicht erstellt werden.
         cy.intercept('POST', '/projekt/feedback', req => {
@@ -129,5 +119,15 @@ describe('FormView', () => {
         cy.wait('@checkAuth')
 
         cy.url().should('match', /\/login$/)
+    })
+
+    it('Das `Feedback Hub` Logo verlinkt auf `/`', () => {
+        setup()
+
+        cy.intercept('/projekt/feedback', req => {
+            req.reply({ statusCode: 200, body: { data: [] } })
+        })
+
+        cy.get('#logo').invoke('attr', 'href').should('equal', '/')
     })
 })

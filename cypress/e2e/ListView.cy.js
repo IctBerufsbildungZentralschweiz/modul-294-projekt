@@ -34,11 +34,6 @@ describe('Listenansicht', () => {
         cy.contains('.logo', 'Feedback Hub')
     })
 
-    it('Das Feedback Hub Logo verlinkt auf `/`', () => {
-        setup()
-        cy.get('#logo').invoke('attr', 'href').should('equal', '/')
-    })
-
     it('Der `Feedback erstellen` Link verweist auf `/form` (nicht `/login`)', () => {
         setup()
         cy.get('.btn-create').invoke('attr', 'href').should('match', /\/form$/)
@@ -84,4 +79,8 @@ describe('Listenansicht', () => {
         })
     })
 
+    it('Das Feedback Hub Logo verlinkt auf `/`', () => {
+        setup()
+        cy.get('#logo').invoke('attr', 'href').should('equal', '/')
+    })
 })
